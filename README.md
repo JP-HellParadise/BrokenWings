@@ -1,6 +1,10 @@
 Broken Wings
 ============
 
+Forked version with Game Stage compat (maybe?????)
+
+============
+
 Broken Wings is a creative flight blocker. It works per-dimension.
 
 The default settings block flight in dimension 7, the Twilight Forest. It can be configured as a whitelist or a blacklist for dimensions to allow flight in, or to blanket-ban all creative flight in all dimensions. You can also choose to block elytra flight.
