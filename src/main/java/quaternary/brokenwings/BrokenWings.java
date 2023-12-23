@@ -136,6 +136,9 @@ public class BrokenWings {
 	}
 	
 	private static boolean isPlayerImmune(EntityPlayerMP playerMP) {
+		//game stages
+		if (BrokenWingsCompat.GAME_STAGES.isPlayerImmune(playerMP)) return true;
+
 		//check for configuration
 		if (WingConfig.DISABLE_BYPASS_KEYS) return false;
 
