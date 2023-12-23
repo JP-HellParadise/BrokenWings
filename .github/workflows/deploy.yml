@@ -56,5 +56,7 @@ jobs:
       - name: Publish to Modrinth
         if: steps.properties.outputs.publish_to_modrinth == 'true'
         uses: gradle/gradle-build-action@v2
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         with:
           arguments: modrinth
