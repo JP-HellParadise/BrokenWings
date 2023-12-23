@@ -18,6 +18,6 @@ public class AddGlobalAllowStage implements IAction {
 
     @Override
     public String describe() {
-        return null;
+        return "Add global stage to allow player fly in non-blacklisted dimension.";
     }
 }

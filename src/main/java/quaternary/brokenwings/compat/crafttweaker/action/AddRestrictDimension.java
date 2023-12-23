@@ -23,6 +23,6 @@ public class AddRestrictDimension implements IAction {
 
     @Override
     public String describe() {
-        return null;
+        return "Add required stage for dimension, with option to allow bypass keys";
     }
 }
