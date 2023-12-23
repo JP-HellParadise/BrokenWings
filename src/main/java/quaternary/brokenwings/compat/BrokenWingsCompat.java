@@ -16,7 +16,6 @@ public class BrokenWingsCompat {
 
     public static void init() {
         if (Loader.isModLoaded("baubles")) {
-            BrokenWings.LOGGER.info("Baubles detected, initializing compat!");
             BAUBLES = new BubblesCompat();
         }
 
