@@ -63,14 +63,16 @@ dependencies {
     //     transitive = false
     // }
 
-    //Wings
-    implementation rfg.deobf('curse.maven:wings-302584:2829351')
     //LLibrary (for Wings)
-    implementation rfg.deobf("curse.maven:llibrary-243298:3116493")
+    //implementation rfg.deobf("curse.maven:llibrary-243298:3116493")
+    //Wings
+    compileOnly rfg.deobf('curse.maven:wings-302584:2829351')
     //Baubles
-    implementation rfg.deobf("curse.maven:baubles-227083:2518667")
+    compileOnly rfg.deobf("curse.maven:baubles-227083:2518667")
     //CraftTweaker
     implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.0.8.277")
+    //Bookshelf
+    implementation "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.590"
     //GameStages
     implementation "net.darkhax.gamestages:GameStages-1.12.2:2.0.99"
 }
