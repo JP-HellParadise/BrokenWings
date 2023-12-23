@@ -16,6 +16,9 @@ public class WingConfig {
 	//General
 	public static int[] DIMENSION_LIST;
 	public static ListMode MODE;
+
+	//Bypass
+	public static boolean DISABLE_BYPASS_KEYS;
 	public static ItemList ARMOR_BYPASS_KEYS;
 	public static ItemList INVENTORY_BYPASS_KEYS;
 	public static ItemList BUBBLE_BYPASS_KEYS;
@@ -49,9 +52,9 @@ public class WingConfig {
 		//General
 		//TODO maybe ask TF for its config option.
 		int[] defaultBanned = Loader.isModLoaded("twilightforest") ? new int[]{7} : new int[0];
-		
+
 		DIMENSION_LIST = ConfigHelpers.getIntArray(config, "dimensionIdList", "general", defaultBanned, "The list of dimension IDs, used as a allow-list or deny-list, depending on your other config settings. Internal numeric IDs, please.");
-		
+
 		MODE = ConfigHelpers.getEnum(config, "mode", "general", ListMode.DENY_LIST, "What mode should Broken Wings operate under?", (mode) -> {
 			switch (mode) {
 				case DENY_LIST: return "Flying is disabled in only the dimensions listed in \"dimensionList\".";
@@ -61,16 +64,17 @@ public class WingConfig {
 				default: return "h";
 			}
 		}, ListMode.class);
-		
-		ARMOR_BYPASS_KEYS = ConfigHelpers.getItemList(config, "bypassKeyArmor", "general", new ItemList(), "A player wearing one of these armor pieces will be immune to the no-flight rule.");
-		
-		INVENTORY_BYPASS_KEYS = ConfigHelpers.getItemList(config, "bypassKeyInventory", "general", new ItemList(), "A player with one of these items in their inventory will be immune to the no-flight rule.");
-		
-		if(Loader.isModLoaded("baubles")) {
-			BUBBLE_BYPASS_KEYS = ConfigHelpers.getItemList(config, "bypassKeyBauble", "general", new ItemList(), "A player wearing one of these Baubles will be immune to the no-flight rule.");
-		} else {
-			BUBBLE_BYPASS_KEYS = new ItemList();
-		}
+
+		DISABLE_BYPASS_KEYS = config.getBoolean("disableBypassKeys", "bypass", false, "Disable bypass keys, force to rely on Broken Wings mode and mods compat.");
+
+		ARMOR_BYPASS_KEYS = DISABLE_BYPASS_KEYS ?
+			new ItemList() : ConfigHelpers.getItemList(config, "bypassKeyArmor", "bypass", new ItemList(), "A player wearing one of these armor pieces will be immune to the no-flight rule.");
+
+		INVENTORY_BYPASS_KEYS = DISABLE_BYPASS_KEYS ?
+			new ItemList() : ConfigHelpers.getItemList(config, "bypassKeyInventory", "bypass", new ItemList(), "A player with one of these items in their inventory will be immune to the no-flight rule.");
+
+		BUBBLE_BYPASS_KEYS = DISABLE_BYPASS_KEYS && !Loader.isModLoaded("baubles") ?
+			new ItemList() : ConfigHelpers.getItemList(config, "bypassKeyBauble", "bypass", new ItemList(), "A player wearing one of these Baubles will be immune to the no-flight rule.");
 		
 		//Countermeasures
 		Countermeasures.readConfig(config);
@@ -87,8 +91,9 @@ public class WingConfig {
 		FIXED_MESSAGE = config.getString("fixedStatusMessage", "effects", "", "Whatever you enter here will be sent to players when they are dropped out of the sky if 'effects.sendStatusMessage' is enabled. If this is empty, I'll choose from my own internal list of (tacky) messages.").trim();
 		
 		//Client
-		SHOW_BYPASS_KEY_TOOLTIP = config.getBoolean("showBypassKeyTooltip", "client", true, "Show a tooltip on items that are bypass-keys informing the player that they can use this item to bypass the rule.");
-		
+		SHOW_BYPASS_KEY_TOOLTIP = DISABLE_BYPASS_KEYS
+			&& config.getBoolean("showBypassKeyTooltip", "client", true, "Show a tooltip on items that are bypass-keys informing the player that they can use this item to bypass the rule.");
+
 		if(config.hasChanged()) config.save();
 	}
 	

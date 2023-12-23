@@ -1,11 +1,12 @@
-package quaternary.brokenwings.compat;
+package quaternary.brokenwings.compat.bubbles;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
+import quaternary.brokenwings.compat.BrokenWingsProxy;
 import quaternary.brokenwings.config.WingConfig;
 
-public class YeaBubbles implements BubblesProxy {
+public class BubblesCompat implements BrokenWingsProxy {
 	@Override
 	public boolean isPlayerImmune(EntityPlayerMP playerMP) {
 		IBaublesItemHandler bubbles = BaublesApi.getBaublesHandler(playerMP);

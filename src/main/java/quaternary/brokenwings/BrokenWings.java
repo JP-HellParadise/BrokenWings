@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -19,9 +18,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import quaternary.brokenwings.brokenwings.Tags;
-import quaternary.brokenwings.compat.BubblesProxy;
-import quaternary.brokenwings.compat.NayBubbles;
-import quaternary.brokenwings.compat.YeaBubbles;
+import quaternary.brokenwings.compat.BrokenWingsCompat;
 import quaternary.brokenwings.config.ListMode;
 import quaternary.brokenwings.config.WingConfig;
 import quaternary.brokenwings.countermeasures.Countermeasures;
@@ -48,17 +45,11 @@ public class BrokenWings {
 	public static final Random messageRandom = new Random();
 	public static final int MESSAGE_COUNT = 9; //How many entries are in the lang file.
 	
-	public static BubblesProxy BUBBLES_PROXY;
-	
 	@Mod.EventHandler
 	public static void preinit(FMLPreInitializationEvent e) {
 		WingConfig.preinit(e);
-		
-		if(Loader.isModLoaded("baubles")) {
-			BUBBLES_PROXY = new YeaBubbles();
-		} else {
-			BUBBLES_PROXY = new NayBubbles();
-		}
+
+		BrokenWingsCompat.init();
 	}
 	
 	@Mod.EventHandler
@@ -145,23 +136,26 @@ public class BrokenWings {
 	}
 	
 	private static boolean isPlayerImmune(EntityPlayerMP playerMP) {
+		//check for configuration
+		if (WingConfig.DISABLE_BYPASS_KEYS) return false;
+
 		//check to see if they are actually immune to the flight ban :eyes:
 		//check armor
-		for(ItemStack armor : playerMP.getArmorInventoryList()) {
-			if(WingConfig.ARMOR_BYPASS_KEYS.contains(armor, playerMP.dimension)) return true;
+		for (ItemStack armor : playerMP.getArmorInventoryList()) {
+			if (WingConfig.ARMOR_BYPASS_KEYS.contains(armor, playerMP.dimension)) return true;
 		}
-		
+
 		//main inv + hotbar
-		for(ItemStack inv : playerMP.inventory.mainInventory) {
-			if(WingConfig.INVENTORY_BYPASS_KEYS.contains(inv, playerMP.dimension)) return true;
+		for	(ItemStack inv : playerMP.inventory.mainInventory) {
+			if (WingConfig.INVENTORY_BYPASS_KEYS.contains(inv, playerMP.dimension)) return true;
 		}
-		
+
 		//offhand (not included in the main inventory for reasons I guess)
 		ItemStack off = playerMP.getHeldItemOffhand();
-		if(WingConfig.INVENTORY_BYPASS_KEYS.contains(off, playerMP.dimension)) return true;
+		if (WingConfig.INVENTORY_BYPASS_KEYS.contains(off, playerMP.dimension)) return true;
 		
 		//bubbles
-		if(BUBBLES_PROXY.isPlayerImmune(playerMP)) return true;
+		if (BrokenWingsCompat.BAUBLES.isPlayerImmune(playerMP)) return true;
 		
 		return false;
 	}

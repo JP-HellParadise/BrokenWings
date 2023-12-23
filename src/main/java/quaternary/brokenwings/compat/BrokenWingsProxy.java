@@ -2,7 +2,8 @@ package quaternary.brokenwings.compat;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 
-public interface BubblesProxy {
+@FunctionalInterface
+public interface BrokenWingsProxy {
 	/**
 	 * Is this player wearing a Bauble that allows them to bypass the no-flight rule?
 	 */
