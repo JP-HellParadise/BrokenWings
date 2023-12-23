@@ -7,10 +7,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import quaternary.brokenwings.BrokenWings;
+import quaternary.brokenwings.brokenwings.Tags;
 import quaternary.brokenwings.countermeasures.Countermeasures;
 
-@Mod.EventBusSubscriber(modid = BrokenWings.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class WingConfig {
 	
 	//General
@@ -110,7 +110,7 @@ public class WingConfig {
 	
 	@SubscribeEvent
 	public static void configChange(ConfigChangedEvent e) {
-		if(e.getModID().equals(BrokenWings.MODID)) {
+		if(e.getModID().equals(Tags.MOD_ID)) {
 			readConfig();
 		}
 	}

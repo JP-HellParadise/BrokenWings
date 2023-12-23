@@ -8,9 +8,10 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import quaternary.brokenwings.brokenwings.Tags;
 import quaternary.brokenwings.config.WingConfig;
 
-@Mod.EventBusSubscriber(modid = BrokenWings.MODID, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID, value = Side.CLIENT)
 public class WingClientEvents {
 	@SubscribeEvent
 	public static void tooltip(ItemTooltipEvent e) {

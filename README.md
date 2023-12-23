@@ -13,12 +13,11 @@ The default settings block flight in dimension 7, the Twilight Forest. It can be
 
 ## Compiling
 
-Hey, this is me from the future, in 2021! It looks like whatever version of ForgeGradle this used does not work with Forge's weird jar-in-jar system or something so it explodes at runtime because Wings can't find llibrary-core.
-
-* Download LLibrary off of curse.
-* Crack it open in a zip file program and pull out `llibrary-core-<version>.jar`
-* Put it in `run/mods`.
-* Happy hacking.
+1. Clone this repository you have created with this template.
+2. In the local repository, run the command `gradlew setupDecompWorkspace`
+3. Open the project folder in IDEA.
+4. Right-click in IDEA `build.gradle` of your project, and select `Link Gradle Project`, after completion, hit `Refresh All` in the gradle tab on the right.
+5. Run `gradlew runClient` and `gradlew runServer`, or use the auto-imported run configurations in IntelliJ like `1. Run Client`.
 
 ## Quick note
 

@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import quaternary.brokenwings.brokenwings.Tags;
 import quaternary.brokenwings.compat.BubblesProxy;
 import quaternary.brokenwings.compat.NayBubbles;
 import quaternary.brokenwings.compat.YeaBubbles;
@@ -33,18 +34,15 @@ import java.util.Map;
 import java.util.Random;
 
 @Mod(
-	modid = BrokenWings.MODID,
-	name = BrokenWings.NAME,
-	version = BrokenWings.VERSION,
+	modid = Tags.MOD_ID,
+	name = Tags.MOD_NAME,
+	version = Tags.VERSION,
 	guiFactory = "quaternary.brokenwings.config.asdf.GuiFactoryBlahblah"
 )
-@Mod.EventBusSubscriber(modid = BrokenWings.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class BrokenWings {
-	public static final String MODID = "brokenwings";
-	public static final String NAME = "Broken Wings";
-	public static final String VERSION = "2.0.0";
-	
-	public static final Logger LOGGER = LogManager.getLogger(NAME);
+
+	public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 	
 	public static final Map<String, Long> lastMessageTimes = new HashMap<>();
 	public static final Random messageRandom = new Random();
