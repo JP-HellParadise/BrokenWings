@@ -9,10 +9,10 @@ public class BrokenWingsCompat {
 
     // Stub instance
     private static final BrokenWingsProxy STUB = (playerMP) -> true;
-    public static BrokenWingsProxy GAME_STAGES = STUB;
 
     // Compat
     public static BrokenWingsProxy BAUBLES = STUB;
+    public static BrokenWingsProxy GAME_STAGES = STUB;
 
     public static void init() {
         if (Loader.isModLoaded("baubles")) {
