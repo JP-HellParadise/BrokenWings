@@ -7,16 +7,22 @@ public class AddRestrictDimension implements IAction {
 
     private final String stage;
     private final int dimensionId;
+    private final boolean allowBypassKey;
 
-    public AddRestrictDimension(String stage, int dimensionId) {
+    public AddRestrictDimension(String stage, int dimensionId, boolean allowBypassKey) {
 
         this.stage = stage;
         this.dimensionId = dimensionId;
+        this.allowBypassKey = allowBypassKey;
     }
 
     @Override
     public void apply() {
-        GameStagesCompat.DIMENSION_MAP.put(dimensionId, stage);
+        GameStagesCompat.DIMENSION_MAP.put(this.dimensionId, this.stage);
+
+        if (this.allowBypassKey) {
+            GameStagesCompat.DIMENSION_ALLOW_BYPASS_KEYS.add(this.dimensionId);
+        }
     }
 
     @Override
