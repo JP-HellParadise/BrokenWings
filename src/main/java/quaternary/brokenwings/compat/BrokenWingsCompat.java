@@ -16,10 +16,12 @@ public class BrokenWingsCompat {
 
     public static void init() {
         if (Loader.isModLoaded("baubles")) {
+            BrokenWings.LOGGER.info("Baubles detected, initializing compat!");
             BAUBLES = new BubblesCompat();
         }
 
         if (Loader.isModLoaded("gamestages")) {
+            BrokenWings.LOGGER.info("Game Stages detected, initializing compat!");
             GAME_STAGES = new GameStagesCompat();
         }
     }
