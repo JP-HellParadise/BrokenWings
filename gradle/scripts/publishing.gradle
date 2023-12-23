@@ -39,7 +39,7 @@ if (propertyBool('publish_to_curseforge')) {
     assertProperty('release_type')
     setDefaultProperty('curseforge_debug', false, false)
     curseforge {
-        apiKey System.getenv('CURSEFORGE_TOKEN')
+        apiKey = System.getenv('CURSEFORGE_TOKEN') == null ? "" : System.getenv('CURSEFORGE_TOKEN')
         // noinspection GroovyAssignabilityCheck
         project {
             id = propertyString('curseforge_project_id')
@@ -55,7 +55,7 @@ if (propertyBool('publish_to_curseforge')) {
                 }
             }
             mainArtifact tasks.reobfJar, {
-                displayName "${propertyString('mod_name')} ${propertyString('mod_version')}"
+                displayName = "${propertyString('mod_name')} ${propertyString('mod_version')}"
                 if (propertyBool('use_mixins') || propertyBool('use_asset_mover')) {
                     relations {
                         if (propertyBool('use_mixins')) {

@@ -250,7 +250,7 @@ test {
 
 changelog {
     header.set("[${propertyString('mod_version')}] - ${LocalDate.now().format("yyyy-MM-dd")}")
-    headerParserRegex.set(~/(\d+\.\d+)/)
+//    headerParserRegex.set(~/(\d+\.\d+)/)
 }
 
 if (propertyBool('spotless')) {
