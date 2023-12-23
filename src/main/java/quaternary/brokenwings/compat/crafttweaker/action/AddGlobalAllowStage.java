@@ -13,7 +13,7 @@ public class AddGlobalAllowStage implements IAction {
 
     @Override
     public void apply() {
-        GameStagesCompat.GLOBAL_STAGES.add(this.stage);
+        GameStagesCompat.addGlobalAllowStage(this.stage);
     }
 
     @Override

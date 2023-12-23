@@ -18,11 +18,7 @@ public class AddRestrictDimension implements IAction {
 
     @Override
     public void apply() {
-        GameStagesCompat.DIMENSION_MAP.put(this.dimensionId, this.stage);
-
-        if (this.allowBypassKey) {
-            GameStagesCompat.DIMENSION_ALLOW_BYPASS_KEYS.add(this.dimensionId);
-        }
+        GameStagesCompat.addDimensionRestriction(this.stage, this.dimensionId, this.allowBypassKey);
     }
 
     @Override
