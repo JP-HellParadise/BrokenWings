@@ -77,18 +77,17 @@ if (propertyBool('publish_to_curseforge')) {
 // Documentation here: https://github.com/modrinth/minotaur
 if (propertyBool('publish_to_modrinth')) {
     apply plugin: 'com.modrinth.minotaur'
-    assertEnvironmentVariable('MODRINTH_TOKEN')
     assertProperty('modrinth_project_id')
     assertProperty('release_type')
     setDefaultProperty('modrinth_debug', false, false)
     modrinth {
-        token = System.getenv('MODRINTH_TOKEN')
+        token = System.getenv('MODRINTH_TOKEN') ? "" : System.getenv('CURSEFORGE_TOKEN')
         projectId = propertyString('modrinth_project_id')
         versionNumber = propertyString('mod_version')
         versionType = propertyString('release_type')
         uploadFile = tasks.reobfJar
-        gameVersions ['1.12.2']
-        loaders ['forge']
+        gameVersions = ['1.12.2']
+        loaders = ['forge']
         debugMode = propertyBool('modrinth_debug')
         if (propertyBool('use_mixins') || propertyBool('use_asset_mover')) {
             dependencies {
