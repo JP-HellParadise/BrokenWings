@@ -1,6 +1,7 @@
 package quaternary.brokenwings.compat;
 
 import net.minecraftforge.fml.common.Loader;
+import quaternary.brokenwings.BrokenWings;
 import quaternary.brokenwings.compat.bubbles.BubblesCompat;
 import quaternary.brokenwings.compat.gamestages.GameStagesCompat;
 
@@ -15,10 +16,11 @@ public class BrokenWingsCompat {
 
     public static void init() {
         if (Loader.isModLoaded("baubles")) {
+            BrokenWings.LOGGER.info("Baubles detected, initializing compat!");
             BAUBLES = new BubblesCompat();
         }
 
-        if (Loader.isModLoaded("baubles")) {
+        if (Loader.isModLoaded("gamestages")) {
             GAME_STAGES = new GameStagesCompat();
         }
     }
